@@ -6,9 +6,7 @@ describe('Component CurrencyForm', () => {
   it('should render without crashing', () => {
     render(<CurrencyForm action={() => {}} />);
   });
-  it('should run action callback with proper data on form submit', () => {
-    
-    const action = jest.fn();
+  it('should run action callback with proper data on form submit', () => { 
     
     const testCases = [
       { amount: '100', from: 'PLN', to: 'USD' },
@@ -18,17 +16,16 @@ describe('Component CurrencyForm', () => {
     ];
 
     for(const testCase of testCases) {
+      const action = jest.fn();
         
       render(<CurrencyForm action={action} />);
-      // find “convert” button
+
       const submitButton = screen.getByText('Convert');
 
-      // find inputs
       const amountForm = screen.getByTestId('amount');
       const fromSelect = screen.getByTestId('from-select');
       const toSelect = screen.getByTestId('to-select');
 
-      // set values to inputs
       userEvent.type(amountForm, testCase.amount);
       userEvent.selectOptions(fromSelect, testCase.from);
       userEvent.selectOptions(toSelect, testCase.to);
